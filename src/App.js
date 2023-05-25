@@ -1,14 +1,14 @@
 
-import Banner from './componentes/banner/banner';
-import Formulario from './componentes/formulario/formulario';
+import Banner from './componentes/banner';
+import CamposTexto from './componentes/camposFormulario';
+import Formulario from './componentes/formulario';
+
 
 function App() {
   return (
     <div className="App">
       <Banner></Banner>
-      <div className="caixaFormulario">
-        <Formulario></Formulario>
-      </div>
+      <Formulario></Formulario>
     </div>
   );
 }
