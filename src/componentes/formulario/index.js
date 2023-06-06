@@ -2,21 +2,44 @@ import './formulario.css'
 import CamposTexto from '../camposFormulario'
 import ListaSuspensa from '../ListaSuspensa'
 import Botao from '../botao'
+import { useState } from 'react'
 
-const Formulario = () => {
+const Formulario = (props) => {
+ 
+
+const listaDeTimes = [...props.times]
+
+
+const [nome,setNome] = useState('Nome');
+const [cargo,setCargo] = useState('Cargo');
+const [imagem,setImagem] = useState('Imagem');
+const [time,setTime] = useState("")
+
+const cardColaborador = {
+    "Nome": nome,
+    "Cargo": cargo,
+    "Imagem": imagem,
+    "Time": time
+}
+
 const escutador = (event) =>{
     event.preventDefault();
-    console.log("Informações enviadas")
+    props.cadastrarColaborador(cardColaborador)
+    setNome('')
+    setCargo('')
+    setImagem('')
+    setTime('')
+    console.log("O formulario foi enviado contendo as seguintes iformações:", nome,cargo,imagem,time)
 }
-const listaDeTimes = ["Programação","Front-end","Data-Science","Dev-ops","Ux e Design","Mobilie","Inovação e Gestão"]
+
     return (
         <section className='formulario'>
             <form onSubmit={escutador}>
                 <h2>Preencha os dados para criar o card do colaborador</h2>
-                <CamposTexto label="Nome" placeholder="Digite seu nome"></CamposTexto>
-                <CamposTexto label="Cargo" placeholder="Digite seu cargo"></CamposTexto>
-                <CamposTexto label="Imagem" placeholder="Insira o endereço da imagem"></CamposTexto>
-                <ListaSuspensa lista={listaDeTimes} label="Escolha seu time"></ListaSuspensa>
+                <CamposTexto label="Nome" placeholder="Digite seu nome" valor={nome} NaAlteracao={valor => setNome(valor)}></CamposTexto>
+                <CamposTexto label="Cargo" placeholder="Digite seu cargo" valor={cargo} NaAlteracao={valor => setCargo(valor)}></CamposTexto>
+                <CamposTexto label="Imagem" placeholder="Insira o endereço da imagem" valor={imagem} NaAlteracao={valor => setImagem(valor)}></CamposTexto>
+                <ListaSuspensa lista={listaDeTimes} label="Escolha seu time" valor={time} NaAlteracao={(time)=> setTime(time) }></ListaSuspensa>
                 <Botao conteudo="Criar card">Criar card</Botao>
             </form>
         </section>
